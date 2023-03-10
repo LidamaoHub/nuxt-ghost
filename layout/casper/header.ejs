@@ -3,17 +3,29 @@
     <% console.log(page.path) %>
 
     
-   
-   
-    <div class="navbar <% if(page.path=='index.html') {%>home <%}else{%>post-page<%}%>">
+   <!--  <div class="vertical">
         <div class="site-head-content inner">
-            <% if (theme.logo) { %> <a class="blog-logo" href="<%- config.root %>"><img src="<%- theme.logo %>" alt="Blog Logo"/></a> <% }else{ %>
-            <h1 class="blog-title"><%- config.title %></h1>
-            <% } %>
+            <% if (theme.logo) { %> <a class="blog-logo" href="<%- config.root %>"><img src="<%- theme.logo %>" alt="Blog Logo"/></a> <% } %>
+            <h2 class="blog-description"><%- config.subtitle %></h2>
             <div class="nav-menus">
                 <% site.categories.each(function(category){%>
             <div class="menu"><%= category.name %></div>
             <%})%>
+            </div>
+        </div>
+    </div> -->
+   
+    <div class="navbar <% if(page.path=='index.html') {%>home <%}else{%>post-page<%}%>">
+        <div class="site-head-content inner">
+            <% if (theme.logo) { %> 
+                <a class="blog-logo" href="<%- config.root %>"><img src="<%- theme.logo %>" alt="Blog Logo"/></a> 
+            <% }else{ %>
+                <h1 class="blog-title"><a style='color:white' href="<%- config.root %>"><%- config.title %></a></h1>
+            <% } %>
+            <div class="nav-menus">
+                <% site.categories.each(function(category){%>
+                    <div class="menu"><%= category.name %></div>
+                <%})%>
             </div>
             
             
