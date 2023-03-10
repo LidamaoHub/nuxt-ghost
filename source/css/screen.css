@@ -24,6 +24,35 @@
 
 @import url(normalize.css);
 
+:root {
+
+    /* Colours */
+    --color-green: #a4d037;
+    --color-yellow: #fecd35;
+    --color-red: #f05230;
+    --color-darkgrey: #15171A;
+    --color-midgrey: #738a94;
+    --color-lightgrey: #f1f1f1;
+    --color-secondary-text: #979797;
+    --color-border: #e1e1e1;
+    --color-wash: #e5eff5;
+    --color-darkmode: #151719;
+
+    /*
+    An accent color is also set by Ghost itself in
+    Ghost Admin > Settings > Brand
+
+    --ghost-accent-color: {value};
+
+    You can use this variable throughout your styles
+     */
+
+    /* Fonts */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    --font-serif: Georgia, Times, serif;
+    --font-mono: Menlo, Courier, monospace;
+
+}
 
 /* ==========================================================================
    1. Icons - Sets up the icon font and respective classes
@@ -151,19 +180,26 @@ a {
     color: #4a4a4a;
     transition: color ease 0.3s;
 }
-
+/*
 a:hover {
     color: #57A3E8;
-}
+}*/
 
 h1 a, h2 a, h3 a,
 h4 a, h5 a, h6 a {
-    color: #50585D;
+    color: black;
+    font-weight: 800;
+    line-height: 49px;
 }
 
 
-p, ul, ol, dl {
+ ul, ol, dl {
     margin: 1.6em 0;
+}
+
+p{
+    margin:unset;
+/*    margin-bottom: 1.6rem;*/
 }
 
 ol ol, ul ul,
@@ -251,7 +287,6 @@ pre {
     white-space: pre;
     overflow: auto;
     background: #F7FAFB;
-    border-radius: 3px;
 }
 
 pre code, tt {
@@ -347,7 +382,6 @@ margin on the iframe, cause it breaks stuff. */
 
 /* Creates a responsive wrapper that makes our content scale nicely */
 .inner {
-    position: relative;
     width: 80%;
     max-width: 700px;
     margin: 0 auto;
@@ -357,6 +391,10 @@ margin on the iframe, cause it breaks stuff. */
 .vertical {
     display: table-cell;
     vertical-align: middle;
+    background-color: rgba(0,0,0,.3);
+    color: white;
+    height: 40%;
+    width:100%;
 }
 
 
@@ -369,12 +407,68 @@ margin on the iframe, cause it breaks stuff. */
     position: relative;
     display: table;
     width: 100%;
-    height: 60%;
-    margin-bottom: 5rem;
+    height: 40%;
     text-align: center;
     color: #fff;
     background: #303538 no-repeat center center;
     background-size: cover;
+}
+
+.navbar.post-page{
+/*    position: fixed;*/
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0,0,0,.2);
+    display: flex;
+
+}
+.navbar.home{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0,0,0,.2);
+    display: flex;
+    align-items: center;
+
+}
+.navbar.home .blog-logo,.navbar.home .blog-logo{
+text-align: center;
+display: block;
+width: 100%;
+font-size: 44px;
+}
+.blog-logo img {
+        height: 44px;
+    }
+
+.navbar.post-page .blog-logo img{
+    height: 21px;
+}
+    
+
+.navbar.home .nav-menus{
+    position: absolute;
+    bottom: 20px;
+}
+
+.navbar .nav-menus{
+    font-size: 16px;
+    display: flex;
+}
+.nav-menus .menu{
+    margin-left: 40px;
+    cursor: pointer;
+}
+.navbar .inner{
+    display: flex;
+    margin: 0px auto;
+    align-items: center;
+    height: 64px;
+    width: 1200px;
+
 }
 
 .blog-logo {
@@ -382,13 +476,7 @@ margin on the iframe, cause it breaks stuff. */
 }
 
 /* Yo-logo. Yolo-go. Upload one in ghost/settings/ */
-.blog-logo img {
-    display: block;
-    max-height: 100px;
-    width: auto;
-    margin: 0 auto;
-    line-height: 0;
-}
+
 
 /* The details of your blog. Defined in ghost/settings/ */
 .blog-title {
@@ -410,57 +498,386 @@ margin on the iframe, cause it breaks stuff. */
     text-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
 
-/* Every post, on every page, gets this style on its <article> tag */
-.post {
+/*首页整体设计*/
+.outer {
+    padding: 0 max(4vmin,20px);
     position: relative;
-    width:80%;
-    max-width: 700px;
-    margin: 4rem auto;
-    padding-bottom: 4rem;
-    border-bottom: #EBF2F6 1px solid;
+}
+.post-feed {
+    position: relative;
+    display: grid;
+    gap: 4.8vmin 4vmin;
+    grid-template-columns: repeat(6, 1fr);
+    padding: max(4.8vmin, 36px) 0 0;
+}
+.inner {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+}
+/* Every post, on every page, gets this style on its <article> tag */
+
+.post-feed {
+    position: relative;
+    display: grid;
+    gap: 4.8vmin 4vmin;
+    grid-template-columns: repeat(6, 1fr);
+    padding: max(4.8vmin, 36px) 0 0;
+}
+
+:is(.tag-template, .author-template) .post-feed {
+    margin-top: 4vmin;
+}
+
+@media (max-width: 991px) {
+    .post-feed {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    .post-feed {
+        grid-template-columns: 1fr;
+        grid-gap: 40px;
+    }
+}
+
+.post-card {
+    position: relative;
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
     word-break: break-word;
-    hyphens: auto;
 }
 
-/* Add a little circle in the middle of the border-bottom on our .post
-   just for the lolz and stylepoints. */
-.post:after {
+.post-card-image-link {
+    position: relative;
+    overflow: hidden;
     display: block;
+    margin-bottom: 32px;
+}
+
+.post-card-image-link::after {
     content: "";
-    width: 7px;
-    height: 7px;
-    border: #E7EEF2 1px solid;
+    display: block;
+    padding-bottom: 55%;
+}
+
+.post-card[class*="post-access-"] .post-card-image-link::after {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+.post-card.keep-ratio[class*="post-access-"] .post-card-image-link::after {
     position: absolute;
-    bottom: -5px;
-    left: 50%;
-    margin-left: -5px;
-    background: #fff;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    border-radius: 100%;
-    box-shadow: #fff 0 0 0 5px;
+    inset: 0;
+    padding-bottom: 0;
 }
 
-.post-title {
-    margin:0;
+.post-card.keep-ratio:not(.post-card-large):not(.post-card-full) .post-card-image-link::after {
+    padding-bottom: 0;
 }
 
-.post-title a {
+.post-card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-lightgrey) no-repeat center center;
+    object-fit: cover;
+}
+
+.post-card.keep-ratio:not(.post-card-large):not(.post-card-full) .post-card-image {
+    position: static;
+}
+
+.post-card-access {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.post-card-content-link {
+    position: relative;
+    display: block;
+    color: var(--color-darkgrey);
+}
+
+.post-card-content-link:hover {
     text-decoration: none;
 }
 
+.post-feed .no-image .post-card-content-link {
+    padding: 0;
+}
+
+.no-image .post-card-header {
+    margin-top: 0;
+}
+
+.post-card-tags {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 10px;
+    color: var(--color-secondary-text);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1;
+}
+
+.post-card-featured {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding-left: 18px;
+    color: var(--ghost-accent-color);
+}
+
+.post-card-featured svg {
+    position: absolute;
+    left: 0;
+}
+
+.post-card-title {
+    margin: 0;
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.post-card-content-link:hover .post-card-title {
+    opacity: 0.9;
+}
+
+.no-image .post-card-title {
+    margin-top: 0;
+}
+
+.has-serif-title .post-card-title {
+    font-family: var(--font-serif);
+    letter-spacing: -0.005em;
+}
+
+.post-card-title svg {
+    margin-top: -3px;
+    margin-left: -1px;
+}
+
+.post-card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card-excerpt {
+    display: -webkit-box;
+    overflow-y: hidden;
+    margin-top: 12px;
+    max-width: 720px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+}
+
+.has-sans-body .post-card-excerpt {
+    font-family: var(--font-sans);
+}
+
+.post-card:not(.post-card-large):not(.post-card-full):not(.dynamic):not(.no-image) .post-card-excerpt {
+    -webkit-line-clamp: 2;
+}
+
+:is(.tag-template, .author-template) .post-card-excerpt {
+    margin-top: 6px;
+}
+
+.post-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    font-size: 1.3rem;
+    color: var(--color-secondary-text);
+    margin-top: 12px;
+}
+
+.post-card-meta > * {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.post-card-meta > * + *:not(script)::before {
+    width: 2px;
+    height: 2px;
+    content: "";
+    background-color: var(--color-secondary-text);
+    border-radius: 50%;
+}
+
+.post-card-meta .sep {
+    margin: 0 4px;
+}
+
+.author-profile-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: color-mod(var(--color-lightgrey) l(+10%));
+    border-radius: 100%;
+
+    object-fit: cover;
+}
+
+.author-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 0 4px;
+    padding: 0;
+    list-style: none;
+}
+
+.author-list-item {
+    position: relative;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+
+
+
+@media (max-width: 991px) {
+    .post-feed {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    .post-feed {
+        grid-template-columns: 1fr;
+        grid-gap: 40px;
+    }
+}
+
+@media (min-width: 1001px) {
+    .post-card-large {
+        grid-column: span 6;
+        display: grid;
+        grid-gap: 4vmin;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 0;
+    }
+
+    .post-card-large:not(.no-image) .post-card-header {
+        margin-top: 0;
+    }
+
+    .post-card-large .post-card-image-link {
+        position: relative;
+        grid-column: span 2;
+        margin-bottom: 0;
+    }
+
+    .post-card-large .post-card-content {
+        grid-column: span 1;
+    }
+
+    .post-card-large.no-image .post-card-content {
+        grid-column: span 2;
+    }
+
+    .post-card-large .post-card-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .post-card-large .post-card-tags {
+        margin-bottom: 12px;
+    }
+
+    .post-card-large .post-card-title {
+        margin-top: 0;
+        font-size: 4.4rem;
+        line-height: 1.05;
+    }
+
+    .post-card-large .post-card-excerpt {
+        margin-top: 16px;
+    }
+
+    .post-card-full {
+        grid-column: span 6;
+    }
+
+    .post-card-full .post-card-image-link {
+        margin-bottom: 40px;
+    }
+
+    .post-card-full .post-card-tags {
+        margin-bottom: 14px;
+    }
+
+    .post-card-full .post-card-title {
+        font-size: 6.4rem;
+        line-height: 0.95;
+    }
+
+    .post-card-full .post-card-excerpt {
+        margin-top: 20px;
+        font-size: 1.8rem;
+    }
+
+    .post-card-large + .post-card-large:nth-child(even) {
+        margin: 32px 0;
+    }
+
+    .post-card-large + .post-card-large:nth-child(even) .post-card-content {
+        order: -1;
+    }
+
+    .post-card.dynamic {
+        grid-column: span 3;
+    }
+
+    .post-card.dynamic .post-card-title {
+        font-size: 3rem;
+    }
+}
 .post-excerpt p {
-    margin: 1.6rem 0 0 0;
-    font-size: 0.9em;
-    line-height: 1.6em;
+    margin: 16px 0px;
+    font-size: 16px;
+    line-height: 24px;
+    color:rgb(21,23,26);
+    font-weight: 400;
+    cursor: pointer;
 }
 
 .post-meta {
     display: inline-block;
-    margin: 0 0 5px 0;
     font-family: 'Open Sans', sans-serif;
-    font-size: 1.5rem;
-    color: #9EABB3;
+    font-size: 13px;
+    color: rgb(151,151,151);
+    line-height: 18px;
 }
 
 .post-meta a {
@@ -528,92 +945,310 @@ margin on the iframe, cause it breaks stuff. */
 /* ==========================================================================
    5. Single Post - When you click on an individual post
    ========================================================================== */
-
-/* Insert some mad padding up in the header for better spacing */
-.post-template .post-header {
-    padding: 60px 0;
-    text-align: center;
+.article {
+    padding: max(8vmin, 40px) 0 max(8vmin, 64px);
+    word-break: break-word;
 }
 
-.post-template .site-head {
-    color: #303538;
-    border-bottom: #ebf2f6 1px solid;
-    background: none !important;
+.page-template .article {
+    padding-top: max(12vmin, 64px);
 }
 
-.post-template .site-head:after {
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
+.article-header {
+    padding: 0 0 max(6.4vmin, 40px) 0;
+}
+
+.page-template .article-header {
+    padding-bottom: max(3.2vmin, 28px);
+}
+
+.article-tag {
+    margin-bottom: 16px;
+    font-size: 1.6rem;
+}
+
+.article-tag a {
+    color: var(--color-secondary-text);
+}
+
+.article-title {
+    margin-bottom: 0;
+    font-size: clamp(3.2rem, 5vw, 5.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--color-darkgrey);
+}
+
+.has-serif-title .article-title {
+    font-family: var(--font-serif);
+}
+
+.article-excerpt {
+    margin-top: 20px;
+    max-width: 720px;
+    font-size: 2rem;
+    line-height: 1.45;
+    color: var(--color-darkgrey);
+}
+
+.gh-canvas .article-image {
+    grid-column: wide-start / wide-end;
+    width: 100%;
+    margin: max(6.4vmin, 40px) 0 0;
+}
+
+.image-full .article-image {
+    grid-column: full-start / full-end;
+}
+
+.image-small .article-image {
+    grid-column: main-start / main-end;
+}
+
+.gh-canvas .article-image img {
     display: block;
-    width: 7px;
-    height: 7px;
-    margin-left: -5px;
-    content: '';
-    border: #e7eef2 1px solid;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    border-radius: 100%;
-    background: #fff;
-    box-shadow: #fff 0 0 0 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
-/* Keep large images within the bounds of the post-width */
-.post-content img {
-    display: block;
-    max-width: 100%;
-    margin: 0 auto;
-    height: auto;
+@media (max-width: 767px) {
+    .article-excerpt {
+        margin-top: 14px;
+        font-size: 1.7rem;
+    }
 }
 
-/* The author credit area after the post */
-.post-footer {
-    position: relative;
-    margin: 4rem 0 0 0;
-    padding: 4rem 0 0 0;
-    border-top: #EBF2F6 1px solid;
+.gh-canvas {
+    display: grid;
+    grid-template-columns:
+        [full-start]
+        minmax(max(4vmin, 20px), auto)
+            [wide-start]
+            minmax(auto, 240px)
+                [main-start]
+                    min(720px, calc(100% - max(8vmin, 40px)))
+                [main-end]
+            minmax(auto, 240px)
+            [wide-end]
+        minmax(max(4vmin, 20px), auto)
+        [full-end]
+    ;
 }
 
-.post-footer h4 {
-    font-size: 1.8rem;
+.gh-canvas > * {
+    grid-column: main-start / main-end;
+}
+
+.kg-width-wide {
+    grid-column: wide-start / wide-end;
+}
+
+.kg-width-full {
+    grid-column: full-start / full-end;
+}
+
+.kg-width-full img {
+    width: 100%;
+}
+
+
+/* Content
+/* ---------------------------------------------------------- */
+
+/* Content refers to styling all page and post content that is
+created within the Ghost editor. The main content handles
+headings, text, images and lists. We deal with cards lower down. */
+
+/* Default vertical spacing */
+.gh-content p{
+    margin:unset;
+ margin-bottom:3.2rem;
+}
+.gh-content > * + * {
+    margin-top: max(3.2vmin, 24px);
+    margin-bottom: 0;
+}
+
+/* [id] represents all headings h1-h6, reset all margins */
+.gh-content > [id] {
     margin: 0;
+    color: var(--color-darkgrey);
 }
 
-.post-footer p {
-    margin: 1rem 0;
-    font-size: 1.4rem;
+.has-serif-title .gh-content > [id] {
+    font-family: var(--font-serif);
+}
+
+/* Add back a top margin to all headings, unless a heading
+is the very first element in the post content */
+.gh-content > [id]:not(:first-child) {
+/*    margin: 2em 0 0;*/
+}
+
+/* Add a small margin between a heading and anything after it */
+.gh-content > [id] + * {
+    margin-top: 1.5rem !important;
+}
+
+/* A larger margin before/after HRs and blockquotes */
+.gh-content > hr,
+.gh-content > blockquote {
+    position: relative;
+    margin-top: max(4.8vmin, 32px);
+}
+.gh-content > hr + *,
+.gh-content > blockquote + * {
+    margin-top: max(4.8vmin, 32px) !important;
+}
+
+/* Now the content typography styles */
+.gh-content a {
+    color: var(--ghost-accent-color);
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+.gh-content > blockquote:not([class]),
+.gh-content > ol,
+.gh-content > ul,
+.gh-content > dl,
+.gh-content > p {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 2rem;
     line-height: 1.6em;
 }
 
-/* Create some space to the right for the share links */
-.post-footer .author {
-    margin-right: 180px;
+.gh-content .kg-callout-card .kg-callout-text,
+.gh-content .kg-toggle-card .kg-toggle-content > ol,
+.gh-content .kg-toggle-card .kg-toggle-content > ul,
+.gh-content .kg-toggle-card .kg-toggle-content > p {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.9rem;
+    line-height: 1.6em;
 }
 
-/* Drop the share links in the space to the right.
-   Doing it like this means it's easier for the author bio
-   to be flexible at smaller screen sizes while the share
-   links remain at a fixed width the whole time */
-.post-footer .share {
+.gh-content .kg-product-card .kg-product-card-description > p,
+.gh-content .kg-product-card .kg-product-card-description > ol,
+.gh-content .kg-product-card .kg-product-card-description > ul {
+    font-size: 1.7rem;
+    line-height: 1.6em;
+}
+
+.gh-content .kg-callout-card .kg-callout-emoji {
+    font-size: 2.1rem;
+    line-height: 1.4em;
+}
+
+.gh-content .kg-toggle-card .kg-toggle-heading-text {
+    font-size: 2.0rem;
+}
+
+.has-sans-body .gh-content > blockquote,
+.has-sans-body .gh-content > ol,
+.has-sans-body .gh-content > ul,
+.has-sans-body .gh-content > dl,
+.has-sans-body .gh-content > p,
+.has-sans-body .gh-content .kg-callout-card .kg-callout-text,
+.has-sans-body .gh-content .kg-toggle-card .kg-toggle-content > ol,
+.has-sans-body .gh-content .kg-toggle-card .kg-toggle-content > ul,
+.has-sans-body .gh-content .kg-toggle-card .kg-toggle-content > p {
+    font-family: var(--font-sans);
+}
+
+.gh-content > ul,
+.gh-content > ol,
+.gh-content > dl,
+.gh-content .kg-toggle-card .kg-toggle-content > ol,
+.gh-content .kg-toggle-card .kg-toggle-content > ul,
+.gh-content .kg-product-card .kg-product-card-description > ol,
+.gh-content .kg-product-card .kg-product-card-description > ul {
+    padding-left: 1.9em;
+}
+
+.gh-content > blockquote:not([class]) {
+    position: relative;
+    font-style: italic;
+    padding: 0;
+}
+
+.gh-content > blockquote:not([class])::before {
+    content: "";
     position: absolute;
-    top: 4rem;
-    right: 0;
-    width: 140px;
+    left: -1.5em;
+    top: 0;
+    bottom: 0;
+    width: 0.3rem;
+    background: var(--ghost-accent-color);
 }
 
-.post-footer .share a {
-    font-size: 1.8rem;
-    display: inline-block;
-    margin: 1.4rem 1.6rem 1.6rem 0;
-    color: #BBC7CC;
-    text-decoration: none;
+.gh-content :not(pre) > code {
+    vertical-align: middle;
+    padding: 0.15em 0.4em 0.15em;
+    border: #e1eaef 1px solid;
+    font-weight: 400 !important;
+    font-size: 0.9em;
+    line-height: 1em;
+    color: #15171A;
+    background: #f0f6f9;
+    border-radius: 0.25em;
 }
 
-.post-footer .share a:hover {
-    color: #50585D;
+.gh-content pre {
+    overflow: auto;
+    padding: 16px 20px;
+    color: var(--color-wash);
+    font-size: 1.4rem;
+    line-height: 1.5em;
+    background: var(--color-darkgrey);
+    box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
 }
 
+@media (max-width: 650px) {
+    .gh-content > blockquote:not([class]),
+    .gh-content > ol,
+    .gh-content > ul,
+    .gh-content > dl,
+    .gh-content > p,
+    .gh-content .kg-callout-card .kg-callout-text,
+    .gh-content .kg-toggle-card .kg-toggle-content > ol,
+    .gh-content .kg-toggle-card .kg-toggle-content > ul,
+    .gh-content .kg-toggle-card .kg-toggle-content > p {
+        font-size: 1.8rem;
+    }
 
+    .gh-content .kg-product-card .kg-product-card-description > p,
+    .gh-content .kg-product-card .kg-product-card-description > ol,
+    .gh-content .kg-product-card .kg-product-card-description > ul {
+        font-size: 1.6rem;
+    }
+
+    .gh-content blockquote:not([class])::before {
+        left: min(-4vmin, -20px);
+    }
+}
+
+/*用户个人信息*/
+.author{
+    display: flex;
+    margin-top:30px;
+}
+.author img{
+    width:52px;
+    height:52px;
+    margin-right:10px;
+}
+.author .intro h4{
+    margin-bottom:6px;
+    font-size: 1.7rem;
+}
+.author .intro p{
+    margin:unset;
+    color:var(--color-secondary-text);
+    font-size: 14px;
+}
 /* ==========================================================================
    6. Third Party Elements - Embeds from other services
    ========================================================================== */
@@ -638,14 +1273,19 @@ margin on the iframe, cause it breaks stuff. */
 }
 
 /* Hexo: Syntax Highlighter */
-
+figure.highlight tr{
+    display: flex;
+}
+figure.highlight .code{
+    flex:1;
+}
 figure.highlight {
     background:#fff;
     border-radius:0.3em;
     border:1px solid #e1e1e1;
     line-height:1.45em;
     font-size:.9em;
-    margin-bottom:2.1em;
+    margin-bottom:1.5em;
     color:#222;
     overflow:auto;
     white-space:pre;
@@ -799,6 +1439,19 @@ pre .chunk {
 .gist .line-number {
     min-width: 25px;
     font-size: 1.1rem;
+}
+
+.post-footer .share{
+ margin:0px auto;
+        margin-top:30px;
+}
+.post-footer .share .share-title{
+    font-size: 16px;
+    color: var(    --color-midgrey);
+}
+.post-footer .share .share-functions{
+    display: flex;
+        justify-content: space-between;
 }
 
 
@@ -976,6 +1629,10 @@ pre .chunk {
 
 @media only screen and (max-width: 900px) {
 
+.navbar .inner{
+    width: 100%;
+    max-width:900px;
+}
     blockquote {
         margin-left: 0;
     }
@@ -986,7 +1643,6 @@ pre .chunk {
         box-sizing: border-box;
         height: auto;
         min-height: 240px;
-        padding: 15% 0;
     }
 
     .blog-title {
@@ -1037,10 +1693,46 @@ pre .chunk {
 
 
 @media only screen and (max-width: 500px) {
-
-    .blog-logo img {
-        max-height: 80px;
+    .site-head{
+      position: relative;
     }
+    .navbar{
+        position: absolute;
+        left:0px;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        display: flex;
+        align-items: center;
+    }
+    .navbar .nav-menus{
+        position: absolute;
+    font-size: 16px;
+    bottom: 10px;
+    left: 0px;
+    display: flex;
+    padding:0px 20px;
+}
+.nav-menus .menu{
+    margin-right: 20px;
+    margin-left:unset;
+}
+    .outer{
+        padding: unset;
+    }
+
+
+.navbar .inner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: unset;
+}
+
+ .blog-logo img{
+    height: 44px !important;
+}
+    
 
     .inner,
     .pagination {
@@ -1051,14 +1743,11 @@ pre .chunk {
 
     .post {
         width:auto;
-        margin-left: 16px;
-        margin-right: 16px;
         font-size: 0.8em;
         line-height: 1.6em;
     }
 
     .site-head {
-        padding: 10% 0;
     }
 
     .blog-title {
@@ -1104,8 +1793,9 @@ pre .chunk {
     }
 
     .post-footer .share {
-        position: static;
+        position: relative;
         width: auto;
+
     }
 
     .post-footer .share a {
