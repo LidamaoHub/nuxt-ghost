@@ -24,7 +24,8 @@
             <% } %>
             <div class="nav-menus">
                 <% site.categories.each(function(category){%>
-                    <div class="menu"><%= category.name %></div>
+
+                    <div class="menu"><a href="<%=category.path%>"><%= category.name %></a></div>
                 <%})%>
             </div>
             
